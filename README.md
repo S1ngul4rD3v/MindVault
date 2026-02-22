@@ -18,5 +18,6 @@ Copiar `.env.sample` a `.env` y ajustar variables.
 
 ## API
 
+- `GET /` — página principal (EJS)
 - `GET /health` — health check
 - `GET /api-docs` — documentación Swagger

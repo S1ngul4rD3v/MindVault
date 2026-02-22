@@ -1,6 +1,8 @@
 import appController from '../controllers/app.controller.js';
 
 export default function (router) {
+    router.get('/', appController.index);
+
     /**
      * @swagger
      * /health:

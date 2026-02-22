@@ -9,6 +9,10 @@ import routes from './routes/index.js';
 const PORT = process.env.PORT_MINDVAULT || 3000;
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
