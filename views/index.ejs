@@ -8,23 +8,79 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: #1a1a2e;
             min-height: 100vh;
+            color: #e8e8e8;
+            display: flex;
+        }
+        .sidebar {
+            width: 280px;
+            min-height: 100vh;
+            background: #16213e;
+            border-right: 1px solid #0f3460;
+            padding: 1rem 0;
+            flex-shrink: 0;
+        }
+        .sidebar h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0 1rem 0.75rem;
+            border-bottom: 1px solid #0f3460;
+            margin-bottom: 0.75rem;
+        }
+        .notes-list {
+            list-style: none;
+        }
+        .notes-list li {
+            margin: 0;
+        }
+        .notes-list a {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: #e8e8e8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .notes-list a:hover {
+            background: rgba(79, 195, 247, 0.1);
+            border-left-color: #4fc3f7;
+        }
+        .note-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .note-date {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.15rem;
+        }
+        .sidebar-empty {
+            padding: 1rem;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .main {
+            flex: 1;
+            padding: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e8e8e8;
         }
-        .container {
+        .welcome {
             text-align: center;
-            padding: 2rem;
         }
-        h1 {
-            font-size: 2.5rem;
+        .welcome h1 {
+            font-size: 2rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
-        .subtitle {
+        .welcome .subtitle {
             color: #a0a0a0;
             margin-bottom: 2rem;
         }
@@ -49,13 +105,32 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><%= title %></h1>
-        <p class="subtitle">Proyecto Node.js (ESM) con Express</p>
-        <nav class="links">
-            <a href="/health">Health</a>
-            <a href="/api-docs">API Docs</a>
-        </nav>
-    </div>
+    <aside class="sidebar">
+        <h2>Notas</h2>
+        <% if (notes && notes.length > 0) { %>
+            <ul class="notes-list">
+                <% notes.forEach(function(note) { %>
+                    <li>
+                        <a href="#" title="<%= note.title %>">
+                            <span class="note-title"><%= note.title || 'Sin título' %></span>
+                            <span class="note-date"><%= new Date(note.updatedAt).toLocaleDateString('es') %></span>
+                        </a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p class="sidebar-empty">No hay notas todavía.</p>
+        <% } %>
+    </aside>
+    <main class="main">
+        <div class="welcome">
+            <h1><%= title %></h1>
+            <p class="subtitle">Proyecto Node.js (ESM) con Express</p>
+            <nav class="links">
+                <a href="/health">Health</a>
+                <a href="/api-docs">API Docs</a>
+            </nav>
+        </div>
+    </main>
 </body>
 </html>

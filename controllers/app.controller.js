@@ -1,6 +1,9 @@
+import noteService from '../services/note.service.js';
+
 export async function index(req, res) {
     try {
-        res.render('index', { title: 'MindVault' });
+        const notes = await noteService.listNotesForSidebar();
+        res.render('index', { title: 'MindVault', notes });
     } catch (error) {
         console.error('Error rendering index:', error);
         res.status(500).json({ error: error.message });
