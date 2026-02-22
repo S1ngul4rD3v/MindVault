@@ -16,3 +16,6 @@ coverage/
 
 # OS files
 .DS_Store
+
+# PostgreSQL data (docker-compose)
+pgdata/
